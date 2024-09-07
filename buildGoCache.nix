@@ -66,6 +66,7 @@ buildGoModule {
     xargs go build <${importPackagesFile}
     mkdir -p $out/nix-support
     cat > $out/nix-support/setup-hook <<EOF
+      mkdir -p $TMPDIR
       cp --reflink=auto -r $out/go-cache $TMPDIR/go-cache
       chmod -R +w $TMPDIR/go-cache
       ${lib.optionalString proxyVendor ''export GOMODCACHE="$out/go-mod-cache"''}
